@@ -45,9 +45,9 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 	
 #	if  -G "target/${COMPONENT_NAME}-${VERSION}*.*" > /dev/null; then
 		echo -e "Copie des autres artefacts" 
-		cp application/target/${COMPONENT_NAME}-${VERSION}*.* ../distribution-repository/${COMPONENT_NAME}/${VERSION}/
-		cp library/target/${COMPONENT_NAME}-${VERSION}*.* ../distribution-repository/${COMPONENT_NAME}/${VERSION}/	
-		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
+		cp application/target/*-${VERSION}.jar ../distribution-repository/${COMPONENT_NAME}/${VERSION}/
+		cp library/target/*-${VERSION}.jar ../distribution-repository/${COMPONENT_NAME}/${VERSION}/	
+#		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 #	fi 
 cd ..
 
