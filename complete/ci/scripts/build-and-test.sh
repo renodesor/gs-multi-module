@@ -1,11 +1,11 @@
 #!/bin/sh
 set -ex
-cd git-repo
+cd git-repo/complete
 
 #export MAVEN_USER_HOME=$(cd maven-cache && pwd)
-export COMPONENT_NAME=SpringSecurityAuth
-export PRODUCT_NAME=com.renodesor.web
-#export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository -s settings.xml ${MAVEN_ADDITIONAL_ARGS}"
+export COMPONENT_NAME=gs-multi-module
+export PRODUCT_NAME=com.renodesor.multimodule
+export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITIONAL_ARGS}"
 	echo No commit : $(git rev-parse --short HEAD)
 	./mvnw -version
 	if [[ -z "${VERSION}" ]]; then
@@ -20,18 +20,18 @@ export PRODUCT_NAME=com.renodesor.web
 	#Verifier si jacoco-maven-plugin est présent dans pom.xml pour lancer le build
 	
 	MVN_GOAL="package"
-#	if `./mvnw help:effective-pom $MAVEN_ARGS "${MAVEN_ADDITIONAL_ARGS_ARRAY[@]}" | grep -q jacoco-maven-plugin`; then
-#		MVN_GOAL="jacoco:prepare-agent $MVN_GOAL jacoco:report" 
-#	fi 
+	if `./mvnw help:effective-pom $MAVEN_ARGS "${MAVEN_ADDITIONAL_ARGS_ARRAY[@]}" | grep -q jacoco-maven-plugin`; then
+		MVN_GOAL="jacoco:prepare-agent $MVN_GOAL jacoco:report" 
+	fi 
 	MAVEN_ARGS="$MAVEN_ARGS -Drevision=${VERSION} versions: set-property -Dproperty=revision -DnewVersion=${VERSION}"
 	echo MAVEN_ARGS:${MAVEN_ARGS}
 	echo MVN_GOAL:${MVN_GOAL}
 	echo VERSION:${VERSION}
 	
 	# Ajout de la version dans la variable revision, tant pour l'exécution actuelle que pour 1 
-	#MVN_GOAL="$MVN_GOAL -Drevision=${VERSION} versions: set-property -Dproperty=revision -DnewVersion=${VERSION} -DgenerateBackupPoms=false" 
+	MVN_GOAL="$MVN_GOAL -Drevision=${VERSION} versions: set-property -Dproperty=revision -DnewVersion=${VERSION} -DgenerateBackupPoms=false" 
 	echo "Début du Build maven"
-	./mvnw clean package -Drevision=${VERSION}  versions:set-property -Dproperty=revision -DnewVersion=${VERSION} -DgenerateBackupPoms=false
+	./mvnw $MVN_GOAL -Drevision=${VERSION}  versions:set-property -Dproperty=revision -DnewVersion=${VERSION} -DgenerateBackupPoms=false
 	#"${MAVEN_ADDITIONAL_ARGS_ARRAY[@]}"
 	echo "Fin du Build maven"
 	
