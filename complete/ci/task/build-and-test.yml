@@ -3,7 +3,7 @@ image_resource:
   type: docker-image
   source: 
     repository: openjdk
-    tag: 8-jdk-alpine
+    tag: 17-jdk-alpine
 
 params:
   COMPONENT_NAME: 
