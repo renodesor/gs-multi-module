@@ -8,9 +8,9 @@
 		<version>3.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.renodesor.multimodule</groupId>
 	<artifactId>library-complete</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${revision}</version>
 	<name>multi-module-library-complete</name>
 	<description>Demo project for Spring Boot</description>
 

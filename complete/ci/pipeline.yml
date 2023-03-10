@@ -1,0 +1,55 @@
+resource_types:
+- name: artifactory-resource
+  type: docker-image
+  source:
+    repository: springio/artifactory-resource
+    tag: 0.0.1
+ 
+resources:   
+- name: git-repo
+  type: git
+  source:
+    uri: https://github.com/renodesor/SpringSecurityAuth.git
+    branch: main
+    private_key: {{private_key}}
+    
+- name: artifactory-repo
+  type: artifactory-resource
+  source:
+    uri: ((artifactory-server))
+    username: ((artifactory-username))
+    password: ((artifactory-password)) 
+    build_name: 1.0.0
+
+jobs:
+- name: build
+  plan:
+  - get: git-repo
+    trigger: true
+  ####Using a yaml file for the task
+  - task: build-maven
+    file: git-repo/ci/task/build-and-test.yml 
+  #####Using a yaml file for the task
+#  - task: build-maven
+#    config:
+#      platform: linux
+#      image_resource:
+#        type: docker-image
+#        source: 
+#          repository: openjdk
+#          tag: 8-jdk-alpine
+#      inputs:
+#        - name: git-repo
+#      outputs:
+#      - name: distribution-repository
+#      run:
+#        path: git-repo/ci/scripts/build-and-test.sh
+  - put: artifactory-repo
+    params: 
+      repo: reno-rep-local/((PRODUCT_NAME))
+#      version: ${VERSION}
+#      build_number: ${BUILD_ID}
+      folder: distribution-repository
+      build_number: "${BUILD_PIPELINE_NAME}-${BUILD_JOB_NAME}-${BUILD_NAME}"
+      build_uri: "http://localhost:8080/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NUMBER}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
+      disable_checksum_uploads: true

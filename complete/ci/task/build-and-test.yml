@@ -1,0 +1,27 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source: 
+    repository: openjdk
+    tag: 8-jdk-alpine
+
+params:
+  COMPONENT_NAME: 
+  PRODUCT_NAME: 
+  MAVEN_ADDITIONAL_ARGS: 
+  MAVEN_ADDITIONAL_ARGS_LIST:
+  ARTIFACTORY_API_KEY: 
+  VERSION: 
+    
+inputs:
+- name: git-repo
+
+outputs:
+- name: distribution-repository
+- name: VERSION
+
+caches:
+- path: maven-cache
+
+run:
+  path: git-repo/ci/scripts/build-and-test.sh
