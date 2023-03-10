@@ -59,6 +59,8 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 
 		echo -e "List distribution-repository" 
 		ls -l ../distribution-repository
+		
+		echo http://localhost:8080/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NUMBER}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}
 #	fi 
 cd ..
 
