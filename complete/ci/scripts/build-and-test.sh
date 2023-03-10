@@ -60,7 +60,6 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 #		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 
 	cd ../distribution-repository
-		RUN apk add --no-cache zip
 		OUTPUT_FILE="${COMPONENT_NAME}-${VERSION}.tar.gz"
 		touch $OUTPUT_FILE
 		#zip -r $OUTPUT_FILE .
