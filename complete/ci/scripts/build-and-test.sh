@@ -43,7 +43,6 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 	mkdir -p ../distribution-repository/${module_1}/${VERSION}
 	mkdir -p ../distribution-repository/${module_2}/${VERSION}
 	
-	OUTPUT_FILE="../distribution-repository/${COMPONENT_NAME}-${VERSION}.zip"
 	
 #	cp pom.xml ../distribution-repository/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}-${VERSION}.pom
 	cp pom.xml ../distribution-repository/${COMPONENT_NAME}-${VERSION}.pom
@@ -61,6 +60,8 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 #		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 
 	cd ../distribution-repository
+		OUTPUT_FILE="${COMPONENT_NAME}-${VERSION}.zip"
+		touch $OUTPUT_FILE
 		zip -r $OUTPUT_FILE .
 		rm -f *.pom
 		rm -f *.jar
@@ -68,7 +69,6 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 		echo -e "List distribution-repository" 
 		ls -l ../distribution-repository
 		
-		echo http://localhost:8080/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NUMBER}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}
 #	fi 
 cd ..
 
