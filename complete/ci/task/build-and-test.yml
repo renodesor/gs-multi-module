@@ -18,7 +18,7 @@ inputs:
 
 outputs:
 - name: distribution-repository
-- name: VERSION
+- name: version
 
 caches:
 - path: maven-cache
