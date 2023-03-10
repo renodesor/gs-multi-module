@@ -39,24 +39,26 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 	
 	echo -e "Copie du pom"
 	
-	mkdir -p ../distribution-repository/${COMPONENT_NAME}/${VERSION}
-	mkdir -p ../distribution-repository/${module_1}/${VERSION}
-	mkdir -p ../distribution-repository/${module_2}/${VERSION}
+	cd ..
+	
+#	mkdir -p ../distribution-repository/${COMPONENT_NAME}/${VERSION}
+#	mkdir -p ../distribution-repository/${module_1}/${VERSION}
+#	mkdir -p ../distribution-repository/${module_2}/${VERSION}
 	
 	
 #	cp pom.xml ../distribution-repository/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}-${VERSION}.pom
-	cp pom.xml ../distribution-repository/${COMPONENT_NAME}-${VERSION}.pom
+	cp complete/pom.xml ../distribution-repository/${COMPONENT_NAME}-${VERSION}.pom
 #	cp application/pom.xml ../distribution-repository/${module_1}/${VERSION}/${module_1}-${VERSION}.pom
 #	cp library/pom.xml ../distribution-repository/${module_2}/${VERSION}/${module_2}-${VERSION}.pom
-	cp application/pom.xml ../distribution-repository/${module_1}-${VERSION}.pom
-	cp library/pom.xml ../distribution-repository/${module_2}-${VERSION}.pom
+	cp complete/application/pom.xml ../distribution-repository/${module_1}-${VERSION}.pom
+	cp complete/library/pom.xml ../distribution-repository/${module_2}-${VERSION}.pom
 	
 	# est-ce qu'il y a des artefacts à copier autres que le pom.xml? 
 	
 #	if  -G "target/${COMPONENT_NAME}-${VERSION}*.*" > /dev/null; then
 		echo -e "Copie des autres artefacts" 
-		cp application/target/${module_1}-${VERSION}.jar ../distribution-repository/
-		cp library/target/${module_2}-${VERSION}.jar ../distribution-repository/
+		cp complete/application/target/${module_1}-${VERSION}.jar ../distribution-repository/
+		cp complete/library/target/${module_2}-${VERSION}.jar ../distribution-repository/
 #		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 
 	cd ../distribution-repository
