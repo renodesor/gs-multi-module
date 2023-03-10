@@ -43,9 +43,12 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 	mkdir -p ../distribution-repository/${module_1}/${VERSION}
 	mkdir -p ../distribution-repository/${module_2}/${VERSION}
 	
-	cp pom.xml ../distribution-repository/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}-${VERSION}.pom
-	cp application/pom.xml ../distribution-repository/${module_1}/${VERSION}/${module_1}-${VERSION}.pom
-	cp library/pom.xml ../distribution-repository/${module_2}/${VERSION}/${module_2}-${VERSION}.pom
+	OUTPUT_FILE="../distribution-repository/${COMPONENT_NAME}-${VERSION}.zip"
+	
+#	cp pom.xml ../distribution-repository/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}-${VERSION}.pom
+	cp pom.xml ../distribution-repository/${COMPONENT_NAME}-${VERSION}.pom
+#	cp application/pom.xml ../distribution-repository/${module_1}/${VERSION}/${module_1}-${VERSION}.pom
+#	cp library/pom.xml ../distribution-repository/${module_2}/${VERSION}/${module_2}-${VERSION}.pom
 	cp application/pom.xml ../distribution-repository/${module_1}-${VERSION}.pom
 	cp library/pom.xml ../distribution-repository/${module_2}-${VERSION}.pom
 	
@@ -57,6 +60,11 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 		cp library/target/${module_2}-${VERSION}.jar ../distribution-repository/
 #		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 
+	cd ../distribution-repository
+		zip -r $OUTPUT_FILE .
+		rm -f *.pom
+		rm -f *.jar
+		
 		echo -e "List distribution-repository" 
 		ls -l ../distribution-repository
 		

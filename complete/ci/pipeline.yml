@@ -43,11 +43,11 @@ jobs:
 #      - name: distribution-repository
 #      run:
 #        path: git-repo/ci/scripts/build-and-test.sh
-  - get: version
+#  - get: version
   - put: artifactory-repo
     params: 
       repo: reno-rep-local/((PRODUCT_NAME))
-      version: VERSION
+      version: version
       build_number: ${BUILD_ID}
       folder: distribution-repository
 #      build_number: "${BUILD_PIPELINE_NAME}-${BUILD_JOB_NAME}-${BUILD_NAME}"
