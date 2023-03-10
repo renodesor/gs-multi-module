@@ -4,6 +4,8 @@ cd git-repo/complete
 
 #export MAVEN_USER_HOME=$(cd maven-cache && pwd)
 export COMPONENT_NAME=gs-multi-module
+export module_1=multi-module-application-complete
+export module_2=library-complete
 export PRODUCT_NAME=com.renodesor.multimodule
 export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITIONAL_ARGS}"
 	echo No commit : $(git rev-parse --short HEAD)
@@ -38,15 +40,19 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 	echo -e "Copie du pom"
 	
 	mkdir -p ../distribution-repository/${COMPONENT_NAME}/${VERSION}
+	mkdir -p ../distribution-repository/${module_1}/${VERSION}
+	mkdir -p ../distribution-repository/${module_2}/${VERSION}
 	
 	cp pom.xml ../distribution-repository/${COMPONENT_NAME}/${VERSION}/${COMPONENT_NAME}-${VERSION}.pom
+	cp application/pom.xml ../distribution-repository/${module_1}/${VERSION}/${module_1}-${VERSION}.pom
+	cp library/pom.xml ../distribution-repository/${module_2}/${VERSION}/${module_2}-${VERSION}.pom
 	
 	# est-ce qu'il y a des artefacts à copier autres que le pom.xml? 
 	
 #	if  -G "target/${COMPONENT_NAME}-${VERSION}*.*" > /dev/null; then
 		echo -e "Copie des autres artefacts" 
-		cp application/target/*-${VERSION}.jar ../distribution-repository/${COMPONENT_NAME}/${VERSION}/
-		cp library/target/*-${VERSION}.jar ../distribution-repository/${COMPONENT_NAME}/${VERSION}/	
+		cp application/target/${module_1}-${VERSION}.jar ../distribution-repository/${module_1}/${VERSION}/
+		cp library/target/${module_2}-${VERSION}.jar ../distribution-repository/${module_2}/${VERSION}/	
 #		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 #	fi 
 cd ..
