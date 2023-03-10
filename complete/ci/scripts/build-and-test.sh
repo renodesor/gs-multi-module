@@ -61,9 +61,10 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 
 	cd ../distribution-repository
 		RUN apk add --no-cache zip
-		OUTPUT_FILE="${COMPONENT_NAME}-${VERSION}.zip"
+		OUTPUT_FILE="${COMPONENT_NAME}-${VERSION}.tar.gz"
 		touch $OUTPUT_FILE
-		zip -r $OUTPUT_FILE .
+		#zip -r $OUTPUT_FILE .
+		tar -czvf $OUTPUT_FILE .
 		rm -f *.pom
 		rm -f *.jar
 		
