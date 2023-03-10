@@ -1,6 +1,6 @@
 #!/bin/sh
 set -ex
-cd git-repo/complete
+pushd git-repo/complete
 
 #export MAVEN_USER_HOME=$(cd maven-cache && pwd)
 export COMPONENT_NAME=gs-multi-module
@@ -45,8 +45,9 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 	
 #	if  -G "target/${COMPONENT_NAME}-${VERSION}*.*" > /dev/null; then
 		echo -e "Copie des autres artefacts" 
-		cp target/${COMPONENT_NAME}-${VERSION}*.* ../distribution-repository/${COMPONENT_NAME}/${VERSION}/	
+		cp application/target/${COMPONENT_NAME}-${VERSION}*.* ../distribution-repository/${COMPONENT_NAME}/${VERSION}/
+		cp library/target/${COMPONENT_NAME}-${VERSION}*.* ../distribution-repository/${COMPONENT_NAME}/${VERSION}/	
 		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 #	fi 
-cd ..
+popd
 
