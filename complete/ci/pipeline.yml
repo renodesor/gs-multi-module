@@ -9,9 +9,8 @@ resources:
 - name: git-repo
   type: git
   source:
-    uri: https://github.com/renodesor/SpringSecurityAuth.git
+    uri: ((git-repo-url))
     branch: main
-    private_key: {{private_key}}
     
 - name: artifactory-repo
   type: artifactory-resource
@@ -28,7 +27,7 @@ jobs:
     trigger: true
   ####Using a yaml file for the task
   - task: build-maven
-    file: git-repo/ci/task/build-and-test.yml 
+    file: git-repo/complete/ci/task/build-and-test.yml 
   #####Using a yaml file for the task
 #  - task: build-maven
 #    config:

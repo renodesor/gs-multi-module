@@ -24,4 +24,4 @@ caches:
 - path: maven-cache
 
 run:
-  path: git-repo/ci/scripts/build-and-test.sh
+  path: git-repo/complete/ci/scripts/build-and-test.sh
