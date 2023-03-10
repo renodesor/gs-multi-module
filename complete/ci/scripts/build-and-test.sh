@@ -1,6 +1,6 @@
 #!/bin/sh
 set -ex
-pushd git-repo/complete
+cd git-repo/complete
 
 #export MAVEN_USER_HOME=$(cd maven-cache && pwd)
 export COMPONENT_NAME=gs-multi-module
@@ -49,5 +49,5 @@ export MAVEN_ARGS="-Dmaven.repo.local=../maven-cache/repository ${MAVEN_ADDITION
 		cp library/target/${COMPONENT_NAME}-${VERSION}*.* ../distribution-repository/${COMPONENT_NAME}/${VERSION}/	
 		rm -f ../distribution-repository/${COMPONENT_NAME}/${VERSION}/*.original
 #	fi 
-popd
+cd ..
 
